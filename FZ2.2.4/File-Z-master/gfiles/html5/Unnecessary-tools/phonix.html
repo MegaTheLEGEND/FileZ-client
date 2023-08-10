@@ -1,0 +1,149 @@
+v0.31a
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unnecessary Phonetic Generator</title>
+    <style>
+        /* Add custom font */
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('../../../css/font v2/unnecessaryv3.ttf') format('truetype');
+        }
+		#outputSecondary {
+			font-family: 'CustomFont', sans-serif;
+			font-size: 76px; /* Adjust the value to make the font size bigger */
+		}
+		body {
+			background-color: lightblue; /* Set the background color to blue */
+		}
+    </style>
+</head>
+<body>
+    <h1>Unnecessary Phonetic Generator</h1>
+    <input type="text" id="inputText" placeholder="Enter text">
+    <button onclick="generatePhonetic()">Generate Phonetic</button>
+    <p id="no">How to Speak:</p><p id="output"></p>
+    <!-- Add secondary output element -->
+    <p id="no2">Text as Unnecessary:</p><p id="outputSecondary"></p>
+
+    <script>
+        function generatePhonetic() {
+            var inputText = document.getElementById("inputText").value;
+            var outputElement = document.getElementById("output");
+            var outputSecondaryElement = document.getElementById("outputSecondary");
+            var phoneticText = convertToPhonetic(inputText);
+            var englishMirroredText = inputText; // Use the original text for secondary output
+            outputElement.innerHTML = phoneticText;
+            outputSecondaryElement.innerHTML = englishMirroredText;
+        }
+
+        function convertToPhonetic(text) {
+            var words = text.toLowerCase().split(' ');
+            var phoneticArray = [];
+
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+                var phoneticWord = getPhoneticTranscription(word);
+
+                phoneticArray.push('/' + phoneticWord + '/');
+            }
+
+            return phoneticArray.join(' ');
+        }
+
+        function isYAVowel(char) {
+            return ['a', 'e', 'i', 'o', 'u'].indexOf(char) !== -1;
+        }
+
+        function getPhoneticTranscription(word) {
+            var phoneticMap = {
+                'a': 'o',
+                'b': 'f',
+                'c': '-ex-',
+                'd': 'h',
+                'e': 'u', 
+                'f': 'b', 
+                'g': 'k', 
+                'h': 'd', 
+                'i': 'a', 
+                'j': 'm', 
+                'k': 'g', 
+                'l': 'p',
+                'm': 'j', 
+                'n': 'r', 
+                'o': 'e', 
+                'p': 'l', 
+                'q': 't', 
+                'r': 'n', 
+                's': 'w', 
+                't': 'q', 
+                'u': 'i', 
+                'v': 'z', 
+                'w': 's', 
+                'x': '-yuh-', 
+                'y': 'k',   // Default translation for 'y' as a consonant
+                'z': 'v'
+            };
+            
+            var consonantCombos = {
+                'ch': 'ch',
+                'th': 'th',
+                'sh': 'sh',
+                'ph': 'b',
+                'ck': 'g',
+                'st': 'st',
+                'br': 'br',
+                'gr': 'gr',
+                'dr': 'dr',
+                'tr': 'tr',
+                'cr': 'cr',
+                'fr': 'fr',
+                'bl': 'bl',
+                'cl': 'cl',
+                'fl': 'fl',
+                'gl': 'gl',
+                'pl': 'pl',
+                'sl': 'sl',
+                'sm': 'sm',
+                'sn': 'sn',
+                'sp': 'sp',
+                'sw': 'sw',
+                'tw': 'tw',
+                'qu': 'qu',
+                'sc': 'sc',
+                'sk': 'sk',
+                'pr': 'pr',
+                'wr': 'wr',
+                'wh': 'wh',
+                'th': 'th',
+				'lp': 'lep'
+            };
+
+            var phoneticWord = '';
+            var prevChar = '';  // Keep track of the previous character for 'y' logic
+
+            for (var j = 0; j < word.length; j++) {
+                var char = word.charAt(j);
+                var combo = word.substring(j, j + 2);
+
+                if (consonantCombos.hasOwnProperty(combo)) {
+                    phoneticWord += consonantCombos[combo];
+                    j++;  // Move one extra step for the combo
+                } else if (char === 'y') {
+                    if (j === 0 || isYAVowel(word.charAt(j - 1))) {
+                        phoneticWord += 'k'; 
+                    } else {
+                        phoneticWord += 'u';  
+                    }
+                } else if (phoneticMap.hasOwnProperty(char)) {
+                    phoneticWord += phoneticMap[char];
+                } else {
+                    phoneticWord += char;
+                }
+            }
+
+            return phoneticWord;
+        }
+    </script>
+</body>
+</html>
