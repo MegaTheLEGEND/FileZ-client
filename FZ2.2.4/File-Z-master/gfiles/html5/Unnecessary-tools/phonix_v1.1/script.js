@@ -112,12 +112,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function process_English_Layer_2(var1) {
         // Step 2: Perform second layer of character replacements for uncommon letter combos
-        const L_consonants = 'bcdfghjkmnpqrstvwxyz'; // excluding L
-        const M_consonants = 'bcdfghjklnpqrstvwxyz'; // excluding M
-        const R_consonants = 'bcdfghjklmnpqstvwxyz'; // excluding R
-        const S_consonants = 'bcdfghjklmnpqrtvwxyz'; // excluding S
-        const W_consonants = 'bcdfghjklmnpqrstvxyz'; // excluding W
-        const N_consonants = 'bcdfghjklmpqrstvwxyz'; // excluding N
+        const L_consonants = 'bcdfghjkmnpqrstvwxz'; // excluding L + Y
+        const M_consonants = 'bcdfghjklnpqrstvwxz'; // excluding M + Y
+        const R_consonants = 'bcdfghjklmnpqstvwxz'; // excluding R + Y
+        const S_consonants = 'bcdfghjklmnpqrtvwxz'; // excluding S + Y
+        const W_consonants = 'bcdfghjklmnpqrstvxz'; // excluding W + Y
+        const N_consonants = 'bcdfghjklmpqrstvwxz'; // excluding N + Y
 
         const list_2 = {};
 
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 phoneticWord += char;
             }
         }
-
+		console.log("layer 3 (final): " + phoneticWord)
         return phoneticWord;
     }
 
