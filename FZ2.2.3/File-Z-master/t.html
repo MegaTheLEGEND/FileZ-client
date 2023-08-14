@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RESOURCES</title>
+<link rel="icon" type="image/x-icon" href="images/Z.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+ 
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <img src="images/Z.jpg" style="width:100%">
+  
+  
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="g.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <img src="images/g.png" style="width:40px;height:40px; filter: invert(1);">
+    <p>GAMES</p>
+  </a>
+  
+    <a href="t.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <img src="images/r.png" style="width:40px;height:50px;">
+    <p>RESOURCES</p>
+  </a>
+  
+     <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <img src="images/a.png" style="width:40px;height:40px; filter: invert(1);">
+    <p>ABOUT</p>
+  </a>
+  
+      <a href="s.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <img src="images/s.png" style="width:40px;height:40px; filter: invert(1);">
+    <p>SETTINGS</p>
+  </a>
+  
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="g.html" class="w3-bar-item w3-button" style="width:25% !important">GAMES</a>
+	<a href="t.html" class="w3-bar-item w3-button" style="width:25% !important">RESOURCES</a>
+    <a href="about.html" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="s.html" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  
+    <h1 style="color:yellow;" class="w3-jumbo"><span class="w3-hide-small">File-Z,</span> Resources</h1>
+    <br>
+     <div id="linkList" class="link-list">
+    <h2 class="list-title"></h2>
+    <input type="text" class="search-input" placeholder="Search">
+  </div>
+  
+    
+  
+  
+
+
+<!-- END PAGE CONTENT -->
+</div>
+<script src="https://megathelegend.github.io/File-Z-backend/main.js"></script>
+<script src="version.js"></script>
+  <script src="https://megathelegend.github.io/File-Z-backend/settings/title.js"></script>
+</body>
+</html>
+
+<style>
+
+.link-list {
+  padding: 20px;
+  background-color: #222;
+  border-radius: 8px;
+  width: 50%;
+  max-width: 600px;
+}
+
+.list-title {
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.link-list li {
+  margin-bottom: 5px;
+}
+
+.link-list li a {
+  color: white;
+  text-decoration: none;
+}
+
+.link-list li a:hover {
+  text-decoration: underline;
+}
+</style>
+
+<script>
+fetch('https://megathelegend.github.io/File-Z-backend/resources/list.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Unable to retrieve data');
+    }
+    return response.json();
+  })
+  .then(data => {
+    const linkList = document.getElementById('linkList');
+    const listTitle = document.querySelector('.list-title');
+    listTitle.textContent = data.listTitle;
+
+    const searchInput = document.querySelector('.search-input');
+    searchInput.addEventListener('input', searchLinks);
+
+    const linkItems = data.urls.map(url => {
+      const listItem = document.createElement('li');
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.textContent = url;
+
+      listItem.appendChild(anchor);
+      return listItem;
+    });
+
+    linkItems.forEach(item => {
+      linkList.appendChild(item);
+    });
+
+    function searchLinks() {
+      const query = searchInput.value.toLowerCase();
+      linkItems.forEach(item => {
+        const linkText = item.querySelector('a').textContent.toLowerCase();
+        if (linkText.includes(query)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  })
+  .catch(error => {
+    console.log('Error fetching link list:', error);
+    const linkList = document.getElementById('linkList');
+    linkList.textContent = 'Are you offline? We could not retrieve the data.';
+  });
+</script>

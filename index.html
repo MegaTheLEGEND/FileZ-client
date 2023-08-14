@@ -4,17 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Version</title>
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        #popupContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+
+        #popupContent {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        #closePopupButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex; /* Add this */
+            align-items: center; /* Add this */
+            padding: 1rem 2rem; /* Adjust padding */
+        }
+        #headerText {
+            text-align: center;
+            display: flex; /* Add this */
+            align-items: center; /* Add this */
+            margin-left: 40%;
+            margin-top: -100px;
+            position: absolute;
+        }
+
+        #logo img {
+            width: 150px; /* Set the width of the logo */
+            height: auto; /* Maintain aspect ratio */
+            margin-left: -30px;
+        }
+
+        #buttonsContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .downloadButton {
+            background-color: #28a745; /* Blue accent */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .downloadButton:hover {
+                background-color: deeppink; /* Darker blue accent on hover */
+            }
+
+        #showPopupButton {
+            background-color: #007bff; /* blue accent */
+        }
+
+        #pageButton {
+            background-color: indianred; /* red accent */
+        }
+    </style>
 </head>
 <body>
+    <div id="header">
+            <div id="logo">
+                <img src="assets/mci_logo.png" alt="FileZ is a subsidiary asset of MCI inc.">
+            </div>
+            
+    </div>
+    <div id="headerText">
     <h1>Click a Button to Redirect</h1>
+</div>
 
-    <button onclick="redirectToPath1()">Go to FileZ-client v2.2.4</button>
+    <div id="buttonsContainer">
+        <button id="showPopupButton" class="downloadButton">Info</button>        
+        <button id="pageButton" class="downloadButton" onclick="redirectToPath3()">Go to FileZ-client Archive</button>
+        <button class="downloadButton" onclick="redirectToPath1()">Go to FileZ-client v2.2.4 (Latest)</button>
+        <button class="downloadButton" onclick="redirectToPath2()">Go to FileZ-client v2.2.3 (leaving soon)</button>
+    </div>
 
+    <div id="popupContainer">
+        <div id="popupContent">
+            <span id="closePopupButton">&times;</span>
+            <div id="info">
+                
+            </div>
+        </div>
+    </div>
 
     <script>
         function redirectToPath1() {
-            window.location.href = "FZ2.2.4/boot.html"; // Change 'path1.html' to your desired path
+            window.location.href = "FZ2.2.4/boot.html";
         }
+
+        function redirectToPath2() {
+            window.location.href = "FZ2.2.3/boot.html";
+        }
+
+        function redirectToPath3() {
+            window.location.href = "FZ_archive/index.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const showPopupButton = document.getElementById("showPopupButton");
+            const popupContainer = document.getElementById("popupContainer");
+            const closePopupButton = document.getElementById("closePopupButton");
+
+            showPopupButton.addEventListener("click", function () {
+                popupContainer.style.display = "flex";
+            });
+
+            closePopupButton.addEventListener("click", function () {
+                popupContainer.style.display = "none";
+            });
+        });
     </script>
+
+    <script src="https://megathelegend.github.io/File-Z-backend/about/about.js"></script>
 </body>
 </html>
