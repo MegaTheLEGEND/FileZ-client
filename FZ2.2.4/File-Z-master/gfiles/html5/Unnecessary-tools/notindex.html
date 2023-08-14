@@ -8,15 +8,19 @@
 <body>
     <h1>Click a Button to Redirect</h1>
     
-    <button onclick="redirectToPath1()">Go to Phonics generator</button>
-    <button onclick="redirectToPath2()">Go to notepad</button>
+    <button onclick="redirectToPath1()">Go to Phonetics generator v0.31a</button>
+	<button onclick="redirectToPath2()">Go to Phonetics generator v1.1</button>
+    <button onclick="redirectToPath3()">Go to notepad</button>
     
     <script>
         function redirectToPath1() {
-            window.location.href = "phonix.html"; // Change 'path1.html' to your desired path
+            window.location.href = "phonix_v0.31a/index.html"; // Change 'path1.html' to your desired path
+        }
+		        function redirectToPath2() {
+            window.location.href = "phonix_v1.1/index.html"; // Change 'path1.html' to your desired path
         }
         
-        function redirectToPath2() {
+        function redirectToPath3() {
             window.location.href = "notepad.html"; // Change 'path2.html' to your desired path
         }
     </script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+v1.1
+<html>
+<head>
+    <title>Unnecessary Phonetic Generator</title>
+    <style>
+        /* Add custom font */
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('../../../../css/font v2/unnecessaryv3.ttf') format('truetype');
+        }
+
+        #outputSecondary {
+            font-family: 'CustomFont', sans-serif;
+            font-size: 76px; /* Adjust the value to make the font size bigger */
+        }
+		body {
+			background-color: lightgreen; /* Set the background color to blue */
+		}
+    </style>
+</head>
+<body>
+<h1>Unnecessary Phonetic Generator</h1>
+    <input type="text" id="inputText" placeholder="Enter text">
+    <button id="replaceButton">Generate Phonetic</button>
+    <p id="no">How to Speak:</p><p id="phonetic"></p>
+    <!-- Add secondary output element -->
+    <p id="no2">Text as (mostly) compiled Unnecessary:</p><p id="outputSecondary"></p>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
