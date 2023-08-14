@@ -21,6 +21,14 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 120px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+
+    #logo img {
+        width: 150px; /* Set the width of the logo */
+        height: auto; /* Maintain aspect ratio */
+        position: absolute;
+        right: 0px;
+    }
+
 </style>
 </head>
 <body class="w3-black">
@@ -69,20 +77,24 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
+    <!-- Header/Home -->
 
-  
+    <div id="logo">
+        <img src="https://megathelegend.github.io/File-Z-backend/mci_logo.png" alt="FileZ is a subsidiary asset of MCI inc.">
+    </div>
+
+
     <p style="font-family:'Source Code Pro'; color:red;" class="welcome-msg">Welcome to File-Z.</p>
-	
-	<div id="stuff"></div>
 
-  
-    
-  
-  
+    <div id="stuff"></div>
 
 
-<!-- END PAGE CONTENT -->
+
+
+
+
+
+    <!-- END PAGE CONTENT -->
 </div>
 <script src="https://megathelegend.github.io/File-Z-backend/main.js"></script>
 <script src="https://megathelegend.github.io/File-Z-backend/home/addstuff.js"></script>
