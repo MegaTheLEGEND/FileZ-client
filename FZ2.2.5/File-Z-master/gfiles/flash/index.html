@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html data-ruffle-optout>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Ruffle Web Demo</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+        <link rel="icon" href="https://ruffle.rs/assets/favicon-32.png" sizes="32x32">
+        <link rel="icon" href="https://ruffle.rs/assets/favicon-64.png" sizes="64x64">
+        <link rel="icon" href="https://ruffle.rs/assets/favicon-180.png" sizes="180x180">
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="main" aria-label="Select a demo or drag an SWF">
+            <div id="overlay" class="hidden"></div>
+            <div id="ruffle-player"></div>
+        </div>
+        <script>
+            // Function to extract URL parameters
+            function getURLParameter(name) {
+                return new URLSearchParams(window.location.search).get(name);
+            }
+
+            // Check if 'swf' parameter is present in the URL
+            const swfURL = getURLParameter('swf');
+            if (swfURL) {
+                const rufflePlayer = document.getElementById('ruffle-player');
+                rufflePlayer.innerHTML = `
+                    <object type="application/x-shockwave-flash" data="${swfURL}" allowfullscreen>
+                        <param name="movie" value="${swfURL}">
+                        <param name="wmode" value="transparent">
+                        SWF file could not be loaded.
+                    </object>
+                `;
+            }
+        </script>
+        <script src="https://ruffle.rs/demo/index.js"></script>
+    </body>
+</html>

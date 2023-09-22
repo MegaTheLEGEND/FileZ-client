@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SETTINGS</title>
+  <link rel="icon" type="image/x-icon" href="images/Z.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+    .w3-row-padding img {margin-bottom: 12px}
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {width: 120px;background: #222;}
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {margin-left: 120px}
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+    /* Style for the input section */
+    .input-section {
+      background-color: #444;
+      padding: 20px;
+      border-radius: 5px;
+      width: 50%;
+      margin: 0 auto;
+    }
+    /* Style for the input fields */
+    .input-field {
+      margin-bottom: 10px;
+    }
+    .input-field label {
+      display: block;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .input-field input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      background-color: #ccc;
+    }
+    /* Style for the buttons */
+    .button-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .button-section button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
+    .button-section button:hover {
+      background-color: #45a049;
+    }
+      #logo img {
+          width: 150px; /* Set the width of the logo */
+          height: auto; /* Maintain aspect ratio */
+          position: absolute;
+          right: 0px;
+      }
+
+
+  </style>
+</head>
+<body class="w3-black">
+
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+        <!-- Avatar image in top left corner -->
+        <img src="images/Z.jpg" style="width:100%">
+
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-home w3-xxlarge"></i>
+            <p>HOME</p>
+        </a>
+        <a href="g.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <img src="images/g.png" style="width:40px;height:40px; filter: invert(1);">
+            <p>GAMES</p>
+        </a>
+
+        <a href="t.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <img src="images/r.png" style="width:40px;height:50px;">
+            <p>RESOURCES</p>
+        </a>
+
+        <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <img src="images/a.png" style="width:40px;height:40px; filter: invert(1);">
+            <p>ABOUT</p>
+        </a>
+
+        <a href="s.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+            <img src="images/s.png" style="width:40px;height:40px; filter: invert(1);">
+            <p>SETTINGS</p>
+        </a>
+
+    </nav>
+
+    <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+        <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+            <a href="index.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+            <a href="g.html" class="w3-bar-item w3-button" style="width:25% !important">GAMES</a>
+            <a href="t.html" class="w3-bar-item w3-button" style="width:25% !important">RESOURCES</a>
+            <a href="about.html" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+            <a href="s.html" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+
+    <div id="logo">
+        <img src="https://megathelegend.github.io/File-Z-backend/mci_logo.png" alt="FileZ is a subsidiary asset of MCI inc.">
+    </div>
+
+    <div class="w3-padding-large" id="main"> </div>
+        <!-- Header/Home -->
+        <h1 style="color:blue;" class="w3-jumbo"><span class="w3-hide-small">File-Z, </span> Settings</h1>
+        <br>
+        <div class="input-section">
+            <div class="input-field">
+                <label for="tab-name">Tab Title:</label>
+                <input type="text" id="tab-name" name="tab-name" placeholder="Enter tab title">
+            </div>
+            <div class="input-field">
+                <label for="tab-icon">Tab Icon URL:</label>
+                <input type="text" id="tab-icon" name="tab-icon" placeholder="Enter tab icon URL">
+            </div>
+            <div class="button-section">
+                <button onclick="" id="save-btn">Save Settings</button>
+                <button id="reset-btn">Reset Settings</button>
+            </div>
+            <div id="presets"></div>
+        </div>
+        <br>
+        <div class="input-section">
+            <div class="input-field">
+                <label for="tab-icon">Ask before closing window:</label>
+                <input type="checkbox" id="askOnClose">
+            </div>
+        </div>
+        <br>        
+        <div class="input-section">
+            <div class="input-field">
+                <label for="tab-name">Toast Title:</label>
+                <input type="text" id="Toastt" placeholder="Enter Toast text" value="Toast Test">
+            </div>
+            <div class="input-field">
+                <label for="tab-icon">Toast onclick url:</label>
+                <input type="text" id="Toastu" placeholder="https://google.com" value="#">
+            </div>
+            <div class="input-field">
+                <label for="tab-icon">Toast color:</label>
+                <input type="text" id="Toastc" placeholder="black">
+            </div>
+            <div class="input-field">
+                <label for="tab-icon">Toast Duration:</label>
+                <input type="text" id="Toastd" placeholder="in ms" value="5000">
+            </div>
+            <div class="button-section">
+                <button onclick="showToast(Toastt.value, Toastu.value ,Toastc.value, Toastd.value)">Test Toast</button>
+            </div>
+        </div>
+        
+        <br>
+        <script src="https://megathelegend.github.io/File-Z-backend/settings/settings.js"></script>
+        <script src="https://megathelegend.github.io/File-Z-backend/main.js"></script>
+        <script src="version.js"></script>
+</body>
+</html>
