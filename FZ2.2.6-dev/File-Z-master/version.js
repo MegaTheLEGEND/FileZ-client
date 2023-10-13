@@ -1,4 +1,4 @@
-window.localStorage.setItem("siteVersion", "2.2.5"); // set site version
+window.localStorage.setItem("siteVersion", "2.2.6-dev"); // set site version
 var siteVersion = window.localStorage.getItem("siteVersion");
 
 //toast
