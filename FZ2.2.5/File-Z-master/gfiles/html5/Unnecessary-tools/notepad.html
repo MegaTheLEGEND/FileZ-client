@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unicode Notepad</title>
+<style>
+  @font-face {
+    font-family: 'CustomFont';
+    src: url('../../../css/font v2/unnecessaryv3.ttf') format('truetype');
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  #notepad-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  #notepad {
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 16px;
+    overflow-y: auto;
+    resize: vertical;
+    font-family: "CustomFont", Arial, sans-serif;
+  }
+  #buttons {
+    margin-top: 10px;
+    text-align: center;
+  }
+  button {
+    margin: 5px;
+  }
+  .special-char {
+    font-family: "CustomFont", Arial, sans-serif;
+    font-size: 24px;
+  }
+</style>
+</head>
+<body>
+<div id="notepad-container">
+  <div id="notepad" contenteditable="true"></div>
+  <div id="buttons">
+    <button id="saveToLocal">Save to Local Storage</button>
+    <button id="downloadTxt">Download as Text File</button>
+    <button id="uploadFile">Upload from File</button>
+  </div>
+  <div id="options">
+    <label for="fontSize">Font Size:</label>
+    <select id="fontSize">
+      <option value="12">12px</option>
+      <option value="14">14px</option>
+      <option value="16">16px</option>
+      <option value="18">18px</option>
+      <option value="20">20px</option>
+    </select>
+    <label for="fontColor">Font Color:</label>
+    <input type="color" id="fontColor" value="#000000">
+    <button id="addSpecialChar" class="special-char">퟿</button>
+  </div>
+</div>
+<script>
+  const notepad = document.getElementById('notepad');
+  const charMap = {
+    'a': '\u{D7D4}', 'b': '\u{D7D5}', 'c': '\u{D7D6}', 'd': '\u{D7D7}',
+    'e': '\u{D7D8}', 'f': '\u{D7D9}', 'g': '\u{D7DA}', 'h': '\u{D7DB}',
+    'i': '\u{D7DC}', 'j': '\u{D7DD}', 'k': '\u{D7DE}', 'l': '\u{D7DF}',
+    'm': '\u{D7E0}', 'n': '\u{D7E1}', 'o': '\u{D7E2}', 'p': '\u{D7E3}',
+    'q': '\u{D7E4}', 'r': '\u{D7E5}', 's': '\u{D7E6}', 't': '\u{D7E7}',
+    'u': '\u{D7E8}', 'v': '\u{D7E9}', 'w': '\u{D7EA}', 'x': '\u{D7EB}',
+    'y': '\u{D7EC}', 'z': '\u{D7ED}'
+  };
+
+  // Load content from local storage on page load
+  const savedContent = localStorage.getItem('notepadContent');
+  if (savedContent) {
+    notepad.textContent = savedContent;
+  }
+
+  // Load font size from local storage
+  const savedFontSize = localStorage.getItem('fontSize');
+  if (savedFontSize) {
+    notepad.style.fontSize = savedFontSize + 'px';
+    document.getElementById('fontSize').value = savedFontSize;
+  }
+
+  // Load font color from local storage
+  const savedFontColor = localStorage.getItem('fontColor');
+  if (savedFontColor) {
+    notepad.style.color = savedFontColor;
+    document.getElementById('fontColor').value = savedFontColor;
+  }
+
+  notepad.addEventListener('input', (event) => {
+    const text = event.target.textContent;
+    localStorage.setItem('notepadContent', text);
+  });
+
+  notepad.addEventListener('keydown', (event) => {
+    // Allow Ctrl+C, Ctrl+V, Ctrl+R, and Ctrl+A
+    if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'v' || event.key === 'r' || event.key === 'a')) {
+      return;
+    }
+
+    const typedChar = event.key.toLowerCase();
+    const unicodeChar = charMap[typedChar];
+
+    if (unicodeChar) {
+      event.preventDefault();
+      const selection = window.getSelection();
+      const range = selection.getRangeAt(0);
+      range.deleteContents();
+      const charNode = document.createTextNode(unicodeChar);
+      range.insertNode(charNode);
+      range.setStartAfter(charNode);
+      range.setEndAfter(charNode);
+      notepad.scrollTop = notepad.scrollHeight;
+    }
+  });
+
+  const saveToLocalButton = document.getElementById('saveToLocal');
+  saveToLocalButton.addEventListener('click', () => {
+    const content = notepad.textContent;
+    localStorage.setItem('notepadContent', content);
+    showToast('Content saved to local storage.');
+  });
+
+  const downloadTxtButton = document.getElementById('downloadTxt');
+  downloadTxtButton.addEventListener('click', () => {
+    const content = notepad.textContent;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'notepad.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  const fontSizeSelect = document.getElementById('fontSize');
+  fontSizeSelect.addEventListener('change', () => {
+    const fontSize = fontSizeSelect.value;
+    notepad.style.fontSize = fontSize + 'px';
+    localStorage.setItem('fontSize', fontSize);
+  });
+
+  const fontColorInput = document.getElementById('fontColor');
+  fontColorInput.addEventListener('input', () => {
+    const fontColor = fontColorInput.value;
+    notepad.style.color = fontColor;
+    localStorage.setItem('fontColor', fontColor);
+  });
+
+  const addSpecialCharButton = document.getElementById('addSpecialChar');
+  addSpecialCharButton.addEventListener('click', () => {
+    const specialChar = '\u{D7FF}';
+    notepad.focus();
+    document.execCommand('insertText', false, specialChar);
+  });
+
+  const uploadFileButton = document.getElementById('uploadFile');
+  uploadFileButton.addEventListener('click', () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.txt';
+    fileInput.style.display = 'none';
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const content = event.target.result;
+          notepad.textContent = content;
+          localStorage.setItem('notepadContent', content);
+          showToast('File uploaded successfully.');
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    document.body.appendChild(fileInput);
+    fileInput.click();
+    document.body.removeChild(fileInput);
+  });
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+    }, 100);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(50px)';
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 600);
+    }, 3000);
+  }
+</script>
+</body>
+</html>
