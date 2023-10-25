@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // C
         'cl': 'cil',
         'cr': 'cur',
+	'ct': 'cat',
         'ck': 'k',
         // D
         'dr': 'dur',
