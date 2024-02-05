@@ -84,9 +84,22 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </div>
 
 
-    <p style="font-family:'Source Code Pro'; color:red;" class="welcome-msg">Welcome to File-Z.</p>
+ <div class="parent-container">
+  <div class="welcome-msg-container">
+	<br>
+	<br>
+    <span class="welcome-msg" style="--n:100;font-family:'Source Code Pro';">Welcome to File-Z.</span>
+	<br>
+	<br>
+	<br>
+  </div>
+  <div id="stuff"></div>
+</div>
 
-    <div id="stuff"></div>
+ 
+ 
+	
+    
 
 
 
@@ -103,27 +116,63 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </body>
 </html>
 
+
+<script>
+function adjustWelcomeText(newText) {
+   const welcomeMsg = document.querySelector('.welcome-msg');
+
+   welcomeMsg.style.animation = 'none';
+
+   welcomeMsg.textContent = newText;
+
+   const n = newText.length;
+   welcomeMsg.style.setProperty('--n', n);
+
+ 
+   welcomeMsg.offsetHeight;
+
+
+   welcomeMsg.style.animation = 'b 0.3s infinite steps(1), t calc(var(--n) * 0.1s) steps(var(--n)) forwards';
+}
+
+adjustWelcomeText("Welcome to File-Z.");
+
+</script>
+
+
+
 <style>
 body { 
     background-image:url('background.gif');
     background-repeat:repeat; 
     background-size: 100%;
 }
+
+
+.welcome-msg-container{
+text-align: center;
+}
 .welcome-msg {
-	font-size: 600%;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 0;
-    animation: typing;
-    animation-duration: 1.5s;
-    animation-timing-function: steps(30, end);
-    animation-fill-mode: forwards;
+  text-align: center;
+  color: #0000;
+  background:
+    linear-gradient(-90deg, #F00 5px, #0000 0) 10px 0, linear-gradient(#FC0000 0 0) 0 0;
+  background-size: calc(var(--n) * 1ch) 200%;
+  -webkit-background-clip: padding-box, text;
+  background-clip: padding-box, text;
+  background-repeat: no-repeat;
+  animation:
+    b 0.3s infinite steps(1),
+    t calc(var(--n) * 0.1s) steps(var(--n)) forwards;
+  font-size: 60pt;
+  margin: 0; /* Add this line to reset default margin */
 }
-  
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+@keyframes t{
+  from {background-size:0 200%}
 }
+@keyframes b{
+  50% {background-position:0 -100%,0 0}
+}
+
 </style>
 
